@@ -1,0 +1,20 @@
+{
+  "name": "proyecto-aplicaciones-web-ii",
+  "version": "1.0.0",
+  "description": "Proyecto Aplicaciones web II",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II/issues"
+  },
+  "homepage": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II#readme"
+}
