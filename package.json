@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II/issues"
   },
-  "homepage": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II#readme"
+  "homepage": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II#readme",
+  "dependencies": {
+    "mongoose": "^6.0.12",
+    "whatsapp-web.js": "^1.15.1"
+  }
 }
