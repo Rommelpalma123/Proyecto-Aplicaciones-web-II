@@ -4,7 +4,6 @@
   "description": "Proyecto Aplicaciones web II",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +18,13 @@
   },
   "homepage": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
+    "exceljs": "^4.3.0",
     "express": "^4.17.1",
+    "mime-db": "^1.51.0",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.12",
+    "ora": "^6.0.1",
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.15.1"
   },
