@@ -4,14 +4,16 @@ const fs = require('fs');
 const chalk = require('chalk');
 const exceljs = require('exceljs');
 const moment = require('moment');
-//const  ora = require('ora');
+const server = require('./principal');
+const mongodb = require('./conexiondb.js');
 
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 const express = require('express');
-const { mongo_url } = require('./config');    
-const { Historial }      = require('./models');
+const { mongo_url } = require('./config');     
+const { Sesion }   = require('./models');*/
 
-const SESSION_FILE_PATH = "./session.json";
+
+const SESSION_FILE_PATH = './session.json';
 let client;
 let sessionData; 
 
@@ -91,7 +93,10 @@ const listenMessege = () =>
         }
         saveHistorial(from, body);
 
-        console.log(`${chalk.yellow(body)}`);
+        console.log(`${chalk.yellow(body, to)}`);
+        console.log(`${chalk.yellow(body , from)}`);
+
+
     });
 }
 
@@ -101,20 +106,22 @@ const sendMedia = (to, file) =>
     client.sendMessage(to, mediaFile);
 }
 
-const sendMessage = ( to, message ) => 
+const sendMessage = ( from, to, message ) => 
 {
     client.sendMessage(to, message)
+    client.sendMessage(from, message)
+
 }
 
 const saveHistorial =  (number, message ) =>
 {
-    const pathChat = './chats/${number}.xlxs';
+    const pathChat = `./chats/${number}.xlsx`;
     const workbook = new exceljs.Workbook();
     const today = moment().format('DD-MM-YYYY hh:mm');
 
     if(fs.existsSync(pathChat))
     {
-        workbook.xlxs.readFile(pathChat).then(() => 
+        workbook.xlsx.readFile(pathChat).then(() => 
         {
 
         })
@@ -128,16 +135,19 @@ const saveHistorial =  (number, message ) =>
             { header: 'Message', key: 'message'},
         ]
         worksheet.addRow( [ today, message] );
-        workbook.xlxs.writeFile(pathChat)
+        workbook.xlsx.writeFile(pathChat)
         .then(() => 
         {
             console.log('Historial created')
         })
         .catch((err) => 
         {
-            console.log('Error creating chat')
+            console.log(err.message='Error creating chat');
         })
     }
 }
 
 ( fs.existsSync(SESSION_FILE_PATH)) ? withSession() : withOutSeccion(); // consicion ternaria
+
+
+//Session.create(sessionData);
