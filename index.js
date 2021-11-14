@@ -94,9 +94,8 @@ const listenMessege = () =>
                 sendMedia(from, 'Notas.txt')
         }
         saveHistorial(from, body);
-
         console.log(`${chalk.yellow(body, to)}`);
-        console.log(`${chalk.yellow(body , from)}`);
+        //console.log(`${chalk.yellow(body , from)}`);
 
 
     });
