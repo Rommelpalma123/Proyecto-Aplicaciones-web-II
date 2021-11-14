@@ -1,11 +1,11 @@
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
-const chalk = require('chalk');
-const exceljs = require('exceljs');
-const moment = require('moment');
-const server = require('./principal');
-const mongodb = require('./conexiondb.js');
+const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
+const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
+const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
+const server = require('./principal'); // es una conexion externa para habilitar un localhost en el navegador
+const mongodb = require('./conexiondb.js'); // requiere una conexion externa
 
 /*const mongoose = require('mongoose');
 const express = require('express');
@@ -14,20 +14,22 @@ const { Sesion }   = require('./models');*/
 
 
 const SESSION_FILE_PATH = './session.json';
-let client;
-let sessionData; 
+let client; // variables globales
+let sessionData; // variables globales
 
+// Metodo withSession
 const withSession =  () => 
 {
     // esta funcion servira para cargar una seccion existente en caso que esta este guardada
     const spinner = console.log(`Cargando ${chalk.yellow('validando la sesion de whatsapp ...')}`)
     sessionData = require(SESSION_FILE_PATH);
     //spinner.start(); 
+    // Tenemos para cuando se conecte nuevo cliente
     client = new Client(
         {
             session : sessionData
         })
-
+    // indicara si el cliente esta listo mostrara el mensaje que estara listo sino mostrara que hubo un error
     client.on('ready', () => 
     {
         console.log('client is ready');
@@ -100,12 +102,14 @@ const listenMessege = () =>
     });
 }
 
+// metodo para enviar archivos media
 const sendMedia = (to, file) =>  
 {
     const mediaFile = MessageMedia.fromFilePath(`./mediaSend/${file}`)
     client.sendMessage(to, mediaFile);
 }
 
+// envia el mensaje de y para 
 const sendMessage = ( from, to, message ) => 
 {
     client.sendMessage(to, message)
@@ -113,6 +117,7 @@ const sendMessage = ( from, to, message ) =>
 
 }
 
+// guarda el historial el numero y mensaje
 const saveHistorial =  (number, message ) =>
 {
     const pathChat = `./chats/${number}.xlsx`;
@@ -128,7 +133,7 @@ const saveHistorial =  (number, message ) =>
     }
     else
     {
-        const worksheet = workbook.addWorksheet('Chats');
+        const worksheet = workbook.addWorksheet('Chats'); // se creara una hoja en excel 
         worksheet.columns = [
 
             { header: 'Fecha', key: 'Date'},
