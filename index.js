@@ -7,7 +7,7 @@ const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
 const server = require('./principal'); // es una conexion externa para habilitar un localhost en el navegador
 const mongodb = require('./conexiondb.js'); // requiere una conexion externa
 
-/*const mongoose = require('mongoose');
+/*const mongoose = require('mongoosee');
 const express = require('express');
 const { mongo_url } = require('./config');     
 const { Sesion }   = require('./models');*/
