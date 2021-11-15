@@ -40,6 +40,11 @@ const sendApi = (req, res) => {
 }
 
 server.post('/send', sendApi)
+server.get('/send', (req, res) => {
+
+    res.send('grfg')
+})
+
 
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
