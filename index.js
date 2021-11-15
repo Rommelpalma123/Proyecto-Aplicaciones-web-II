@@ -1,17 +1,45 @@
+const path = require('path'); // requerimos la libreira para path
+const port = 8080;
+const cors = require('cors');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
 const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
 const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
-const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-const server = require('./principal'); // es una conexion externa para habilitar un localhost en el navegador
-const mongodb = require('./conexiondb.js'); // requiere una conexion externa
-
-/*const mongoose = require('mongoosee');
 const express = require('express');
-const { mongo_url } = require('./config');     
-const { Sesion }   = require('./models');*/
+const bodyParser = require('body-parser');
+const { send } = require('process')
+const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
+//const server1 = require('./principal'); // es una conexion externa para habilitar un localhost en el navegador
+const mongodb = require('./conexiondb.js'); // requiere una conexion externa
+const server = express(); // creamos funciones para express
 
+
+server.use(express.urlencoded( {extended: true} ));
+server.use(cors());
+server.use(
+
+    bodyParser.json({
+    })
+)
+
+server.use(
+
+    bodyParser.urlencoded({
+    })
+)
+
+
+const sendApi = (req, res) => {
+
+    const {message, to } = req.body;
+    console.log(message, to);
+    const newNumber = `${to}@c.us`;
+    sendMessage(newNumber, message)
+    res.send({ status:'send'})
+}
+
+server.post('/send', sendApi)
 
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
@@ -21,7 +49,7 @@ let sessionData; // variables globales
 const withSession =  () => 
 {
     // esta funcion servira para cargar una seccion existente en caso que esta este guardada
-    const spinner = console.log(`Cargando ${chalk.yellow('validando la sesion de whatsapp ...')}`)
+    const spinner = console.log(`${chalk.bgCyan.black('Logging in to whatsapp....')}`);
     sessionData = require(SESSION_FILE_PATH);
     //spinner.start(); 
     // Tenemos para cuando se conecte nuevo cliente
@@ -38,7 +66,7 @@ const withSession =  () =>
     client.on('auth_failure', () => 
     {
         //spinner.stop();
-        console.log('Error de autenticacion vuelva a generar su codigo');
+        console.log('Authentication error re-generate your code');
     })
     client.initialize();
 }
@@ -46,7 +74,7 @@ const withSession =  () =>
 // Funcion encargada de generar el codigo qr 
 const withOutSeccion = () => 
 {
-    console.log('No se ha iniciado ninguna sesion'); 
+    console.log('No session has been started'); 
     client = new Client(); // creamon un nuevo cliente para isiniciar sesion 
     client.on( 'qr', qr => // levantamos al cliente con el codigo 
     {
@@ -54,7 +82,7 @@ const withOutSeccion = () =>
         qrcode.generate( qr, { small: true } ); // generamos de manera grafica el codigo qr en consola para ser escaneado
     });
 
-
+    
     client.on( 'authenticated', (session) => // una vez iniciada aparecera el mensaje de autenticado
     {
         console.log('authenticated correct')
@@ -94,7 +122,8 @@ const listenMessege = () =>
                 sendMedia(from, 'Notas.txt')
         }
         saveHistorial(from, body);
-        console.log(`${chalk.yellow(body, to)}`);
+        console.log(`${chalk.cyan(body, from)}`);
+
         //console.log(`${chalk.yellow(body , from)}`);
 
 
@@ -104,15 +133,15 @@ const listenMessege = () =>
 // metodo para enviar archivos media
 const sendMedia = (to, file) =>  
 {
-    const mediaFile = MessageMedia.fromFilePath(`./mediaSend/${file}`)
+    const mediaFile = MessageMedia.fromFilePath(`./media/${file}`)
     client.sendMessage(to, mediaFile);
 }
 
 // envia el mensaje de y para 
-const sendMessage = ( from, to, message ) => 
+const sendMessage = (to, message ) => 
 {
     client.sendMessage(to, message)
-    client.sendMessage(from, message)
+    //client.sendMessage(from, message)
 
 }
 
@@ -127,6 +156,22 @@ const saveHistorial =  (number, message ) =>
     {
         workbook.xlsx.readFile(pathChat).then(() => 
         {
+            const worksheet = workbook.getWorksheet(1);
+            const lastRow = worksheet.lastRow;
+            let getRowInsert = worksheet.getRow(++ (lastRow.number))
+            getRowInsert.getCell('A').value = today;
+            getRowInsert.getCell('B').value = message;
+            getRowInsert.commit();
+            workbook.xlsx.writeFile(pathChat)
+            .then(() =>
+            {
+                console.log('Chat is added correctly');
+            })
+            .catch(() => 
+            {
+                console.log('Something went wrong saving the chat');
+            })
+
 
         })
     }
@@ -155,3 +200,7 @@ const saveHistorial =  (number, message ) =>
 
 
 //Session.create(sessionData);
+server.listen(port, () =>
+{
+    console.log(`conected to port http://localhost:${port}`);
+})
