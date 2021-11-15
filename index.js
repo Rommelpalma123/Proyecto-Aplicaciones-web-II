@@ -10,10 +10,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-//const server1 = require('./principal'); // es una conexion externa para habilitar un localhost en el navegador
-const mongodb = require('./conexiondb.js'); // requiere una conexion externa
+const mongodb = require('./conexiondb'); // requiere una conexion externa
 const server = express(); // creamos funciones para express
 
+
+const chat = fs.readFileSync('./chat.html'); // guardamos dentro de variables al llamdo de paginas html con readFileSync
+const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
 
 server.use(express.urlencoded( {extended: true} ));
 server.use(cors());
@@ -29,7 +31,6 @@ server.use(
     })
 )
 
-
 const sendApi = (req, res) => {
 
     const {message, to } = req.body;
@@ -40,10 +41,14 @@ const sendApi = (req, res) => {
 }
 
 server.post('/send', sendApi)
-server.get('/send', (req, res) => {
+server.get('/', (req, res) => {
+    res.write(chat) // creamos la ruta principal el el cual llamamos al archivo html definido como chat
+}) 
 
-    res.send('grfg')
-})
+server.use( (req, res, next) => {
+
+    res.status(400).sendFile(paginaError); // creamos la ruta principal el el cual llamamos al archivo html definido como index
+});
 
 
 const SESSION_FILE_PATH = './session.json';
@@ -65,13 +70,14 @@ const withSession =  () =>
     // indicara si el cliente esta listo mostrara el mensaje que estara listo sino mostrara que hubo un error
     client.on('ready', () => 
     {
-        console.log('client is ready');
+        console.log(`${chalk.yellow('Client is ready')}`);
         listenMessege();
     })
     client.on('auth_failure', () => 
     {
         //spinner.stop();
-        console.log('Authentication error re-generate your code');
+        console.log(`${chalk.red('Authentication error re-generate your code')}`);
+    
     })
     client.initialize();
 }
@@ -79,7 +85,7 @@ const withSession =  () =>
 // Funcion encargada de generar el codigo qr 
 const withOutSeccion = () => 
 {
-    console.log('No session has been started'); 
+    console.log(`${chalk.green('No session has been started')}`);
     client = new Client(); // creamon un nuevo cliente para isiniciar sesion 
     client.on( 'qr', qr => // levantamos al cliente con el codigo 
     {
@@ -90,7 +96,8 @@ const withOutSeccion = () =>
     
     client.on( 'authenticated', (session) => // una vez iniciada aparecera el mensaje de autenticado
     {
-        console.log('authenticated correct')
+        
+        console.log(`${chalk.green('authenticated correct')}`);
         sessionData = session; // guardamos la sesion dentro de una variable para seguirla usando
         fs.writeFile( SESSION_FILE_PATH, JSON.stringify(session), (err) =>
         {
@@ -170,11 +177,11 @@ const saveHistorial =  (number, message ) =>
             workbook.xlsx.writeFile(pathChat)
             .then(() =>
             {
-                console.log('Chat is added correctly');
+                console.log(`${chalk.green('Chat is added correctly')}`);
             })
             .catch(() => 
             {
-                console.log('Something went wrong saving the chat');
+                console.log(`${chalk.red('Something went wrong saving the cha')}`);
             })
 
 
@@ -196,7 +203,7 @@ const saveHistorial =  (number, message ) =>
         })
         .catch((err) => 
         {
-            console.log(err.message='Error creating chat');
+            console.log(err.message = chalk.red('Error creating chat'));
         })
     }
 }
@@ -205,7 +212,7 @@ const saveHistorial =  (number, message ) =>
 
 
 //Session.create(sessionData);
-server.listen(port, () =>
+server.listen(port, ()=>
 {
-    console.log(`conected to port http://localhost:${port}`);
+    console.log(chalk.yellow(`listen port http://localhost:${port}`));
 })
