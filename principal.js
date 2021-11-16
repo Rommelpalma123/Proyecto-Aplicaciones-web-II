@@ -29,3 +29,7 @@ server.listen(port, ()=>
 
 
 
+server.use( (req, res, next) => {
+
+    res.status(400).sendFile(paginaError); // creamos la ruta principal el el cual llamamos al archivo html definido como index
+});

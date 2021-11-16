@@ -13,23 +13,11 @@ const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
 const mongodb = require('./conexiondb'); // requiere una conexion externa
 const server = express(); // creamos funciones para express
 
-
-const chat = fs.readFileSync('./chat.html'); // guardamos dentro de variables al llamdo de paginas html con readFileSync
-const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
+//const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
+//onst index = fs.readFileSync('./chat.html');
 
 server.use(express.urlencoded( {extended: true} ));
 server.use(cors());
-server.use(
-
-    bodyParser.json({
-    })
-)
-
-server.use(
-
-    bodyParser.urlencoded({
-    })
-)
 
 const sendApi = (req, res) => {
 
@@ -41,14 +29,14 @@ const sendApi = (req, res) => {
 }
 
 server.post('/send', sendApi)
+
 server.get('/', (req, res) => {
-    res.write(chat) // creamos la ruta principal el el cual llamamos al archivo html definido como chat
+    res.send('rfvrgf') // creamos la ruta principal el el cual llamamos al archivo html definido como chat
 }) 
 
-server.use( (req, res, next) => {
+server.use(express.static('public'));
 
-    res.status(400).sendFile(paginaError); // creamos la ruta principal el el cual llamamos al archivo html definido como index
-});
+
 
 
 const SESSION_FILE_PATH = './session.json';

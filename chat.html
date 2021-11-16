@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="img/bot.png">
+    <link href="./css/pagina_principal.css">
     <title>Chat Principal</title>
 </head>
 <body>
-    <h1>
-        fg
-    </h1>
+    <div> 
+        <form action="" (submit)="sendMessage()">
+
+            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="to" type="text" placeholder="numero celular">
+            <textarea  [ngModelOptions]="{standalone: true}" placeholder="Escribe un mensaje" [(ngModel)]="message"></textarea>
+            <button type="submit"> Enviar </button>
+        </form>
+    </div>
     <script src="./index.js"></script>
 </body>
 </html>
