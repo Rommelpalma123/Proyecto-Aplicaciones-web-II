@@ -30,10 +30,6 @@ const sendApi = (req, res) => {
 
 server.post('/send', sendApi)
 
-server.get('/', (req, res) => {
-    res.send('rfvrgf') // creamos la ruta principal el el cual llamamos al archivo html definido como chat
-}) 
-
 server.use(express.static('public'));
 
 
