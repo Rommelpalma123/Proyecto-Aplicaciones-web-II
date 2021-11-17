@@ -16,10 +16,20 @@ const server = express(); // creamos funciones para express
 //const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
 //onst index = fs.readFileSync('./chat.html');
 
-server.use(express.urlencoded( {extended: true} ));
-server.use(cors());
 
-const sendApi = (req, res) => {
+const SESSION_FILE_PATH = './session.json';
+let client; // variables globales
+let sessionData; // variables globales
+
+server.use(cors());
+server.use(
+    bodyParser.json()
+)
+server.use(
+    bodyParser.urlencoded()
+)
+
+const sendWithApi = (req, res) => {
 
     const {message, to } = req.body;
     console.log(message, to);
@@ -28,16 +38,7 @@ const sendApi = (req, res) => {
     res.send({ status:'send'})
 }
 
-server.post('/send', sendApi)
-
-server.use(express.static('public'));
-
-
-
-
-const SESSION_FILE_PATH = './session.json';
-let client; // variables globales
-let sessionData; // variables globales
+server.post('/send', sendWithApi)
 
 // Metodo withSession
 const withSession =  () => 
