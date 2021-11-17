@@ -111,11 +111,11 @@ const listenMessege = () =>
         {
             // preguntas frecuentes de un chat mediante los case para tener una respuesta distinta para cada pregunta
             case 'hola':
-                sendMessage(from, 'Hola como estas',)
+                sendMessage(from, 'Hola, ¿como estas?',)
                 break;
             
             case 'bien': 
-                sendMessage(from, 'bueno')
+                sendMessage(from, '¿Que servicio deseas?')
                 break
             case 'que tal': 
                 sendMessage(from, 'notepad')
