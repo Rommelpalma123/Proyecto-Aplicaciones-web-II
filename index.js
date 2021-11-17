@@ -106,7 +106,7 @@ const listenMessege = () =>
 
         switch (body)
         {
-            // preguntas frecuentes de un chat
+            // preguntas frecuentes de un chat mediante los case para tener una respuesta distinta para cada pregunta
             case 'hola':
                 sendMessage(from, 'Hola como estas',)
                 break;
