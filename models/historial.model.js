@@ -5,7 +5,7 @@ const mongoose = require('mongoose');  //  requerir una libreria de  mongosse pa
 const Historial = new Schema(
 
     {
-        number:  {type: String},  //Craando objetos  historial 
+        //number:  {type: String},  //Craando objetos  historial 
         message: {type: String},  
         today:   {type: String},
 

@@ -1,4 +1,6 @@
 const path = require('path'); // requerimos la libreira para path
+const mongoose = require('mongoose');
+const {mongo_url} = require('./config');
 const port = 8080;
 const cors = require('cors');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
@@ -43,6 +45,7 @@ server.post('/send', sendWithApi)
 // Metodo withSession
 const withSession =  () => 
 {
+
     // esta funcion servira para cargar una seccion existente en caso que esta este guardada
     const spinner = console.log(`${chalk.bgCyan.black('Logging in to whatsapp....')}`);
     sessionData = require(SESSION_FILE_PATH);
@@ -143,8 +146,10 @@ const sendMessage = (to, message ) =>
 }
 
 // guarda el historial el numero y mensaje
-const saveHistorial =  (number, message ) =>
+const saveHistorial =  (number, message )   =>
 {
+    const reconexion = mongoose.connect (mongo_url);
+    console.log(reconexion.message="Conectado"); 
     const pathChat = `./chats/${number}.xlsx`;
     const workbook = new exceljs.Workbook();
     const today = moment().format('DD-MM-YYYY hh:mm');
