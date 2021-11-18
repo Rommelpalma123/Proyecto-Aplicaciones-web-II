@@ -149,7 +149,12 @@ const sendMessage = (to, message ) =>
 const saveHistorial =  (number, message )   =>
 {
     const reconexion = mongoose.connect (mongo_url);
-    console.log(reconexion.message="Conectado"); 
+    const send = {
+
+        message = message,
+        today = today
+    }
+    historia.create(send);
     const pathChat = `./chats/${number}.xlsx`;
     const workbook = new exceljs.Workbook();
     const today = moment().format('DD-MM-YYYY hh:mm');
@@ -171,7 +176,7 @@ const saveHistorial =  (number, message )   =>
             })
             .catch(() => 
             {
-                console.log(`${chalk.red('Something went wrong saving the cha')}`);
+                console.log(`${chalk.red('Something went wrong saving the chat')}`);
             })
 
 
