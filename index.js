@@ -1,7 +1,7 @@
 const path = require('path'); // requerimos la libreira para path
 const mongoose = require('mongoose');
 const {mongo_url} = require('./config');
-const port = 8080;
+const port = 8081;
 const cors = require('cors');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
