@@ -148,13 +148,7 @@ const sendMessage = (to, message ) =>
 // guarda el historial el numero y mensaje
 const saveHistorial =  (number, message )   =>
 {
-    const reconexion = mongoose.connect (mongo_url);
-    const send = {
-
-        message = message,
-        today = today
-    }
-    historia.create(send);
+    
     const pathChat = `./chats/${number}.xlsx`;
     const workbook = new exceljs.Workbook();
     const today = moment().format('DD-MM-YYYY hh:mm');
