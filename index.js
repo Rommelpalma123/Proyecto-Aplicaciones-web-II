@@ -1,8 +1,6 @@
 const path = require('path'); // requerimos la libreira para path
 const mongoose = require('mongoose');
 const {mongo_url} = require('./src/config');
-//const routes = require('./src/routers');
-const port = 8081;
 const cors = require('cors');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
@@ -13,8 +11,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-const mongodb = require('./conexiondb'); // requiere una conexion externa
 const server = express(); // creamos funciones para express
+
 
 //const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
 //onst index = fs.readFileSync('./chat.html');
@@ -202,7 +200,3 @@ const saveHistorial =  (number, message )   =>
 
 
 //Session.create(sessionData);
-server.listen(port, ()=>
-{
-    console.log(chalk.yellow(`listen port http://localhost:${port}`));
-})
