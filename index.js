@@ -1,6 +1,6 @@
 const path = require('path'); // requerimos la libreira para path
 const mongoose = require('mongoose');
-const {mongo_url ,port} = require('./src/config');
+const {mongo_url} = require('./src/config');
 const cors = require('cors');
 const mongo = require('./conexiondb');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
@@ -8,11 +8,13 @@ const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en
 const fs = require('fs'); 
 const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
 const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require('express'); // define rutas
+const bodyParser = require('body-parser'); // texto sin formato
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-const server = express();
+const server  = express();
+const port = 5000;
+const routes = require('./src/routes/index')
 
 
 //const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
@@ -42,6 +44,7 @@ const sendWithApi = (req, res) => {
 
 server.post('/send', sendWithApi)
 
+server.get('/', (req, res)=>{ res.send("hola")})
 // Metodo withSession
 const withSession =  () => 
 {
