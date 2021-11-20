@@ -2,6 +2,7 @@ const path = require('path'); // requerimos la libreira para path
 const mongoose = require('mongoose');
 const {mongo_url} = require('./src/config');
 const cors = require('cors');
+const mongo = require('./conexiondb');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
@@ -11,7 +12,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-const server = express(); // creamos funciones para express
 
 
 //const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta

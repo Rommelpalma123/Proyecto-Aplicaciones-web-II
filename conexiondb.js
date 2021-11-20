@@ -4,7 +4,7 @@ const mongoose = require('mongoose');// requerir una libreria de  mongosse para 
     const dbConnection = async ()=>{
 
         try{
-            await mongoose.connect( process.env.MONGODB_CNN);
+            await mongoose.connect( process.env.mongo_url);
             console.log('Base de datos escuchando')
         }
         catch(error){
