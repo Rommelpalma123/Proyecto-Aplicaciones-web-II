@@ -1,6 +1,6 @@
 const path = require('path'); // requerimos la libreira para path
 const mongoose = require('mongoose');
-const {mongo_url} = require('./src/config');
+const {mongo_url ,port} = require('./src/config');
 const cors = require('cors');
 const mongo = require('./conexiondb');
 const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
@@ -12,6 +12,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
+const server = express();
 
 
 //const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
@@ -200,3 +201,5 @@ const saveHistorial =  (number, message )   =>
 
 
 //Session.create(sessionData);
+
+server.listen(port,()=>{console.log (`esperando... http://localhost:${port} `)})
