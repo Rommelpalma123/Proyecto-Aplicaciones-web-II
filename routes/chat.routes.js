@@ -1,8 +1,16 @@
+const express = require('express')
 const { Router } = require('express');
+const { check } = require('express-validator');
+const router = express.Router();
 
-const router = Router();
-
-router.get('/home',  (req, res) =>
+router.get('/',  (req, res) =>
 {
-    res.send("hola")  
+    res.render("index", {titulo: "hola a todos "})
 })
+
+router.get('/hola',  (req, res) =>
+{
+    res.render("servicios", {sub: "hola a todos "})
+})
+
+module.exports = router;

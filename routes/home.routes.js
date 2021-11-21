@@ -1,8 +1,11 @@
-const express = require('express');
-const server = express();
-// const router = Router();
-
-server.get('/home',  (req, res) =>
+const { Router } = require('express');
+const { check } = require('express-validator');
+const router = Router();
+const cors = require('cors');
+app.use(cors()).use(express.json())
+router.get('/home',(req, res) =>
 {
-    res.send("hola")  
+    res.send('hola');
 })
+
+module.exports = router;
