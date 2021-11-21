@@ -1,21 +1,26 @@
-require('dotenv').config();
-const Server = require('./models/server');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const express = require('express');
+const { MONGO_URL } = require('./database');    
 const routes = require('./routes/chat.routes');
-const server = new Server();
-server.listen();
 
-/*const express = require('express')
-require('dotenv').config();
-const {Router} = require('./models/server');
-const Server = require('./models/server');
-const server = Router();
-server.use('/', require('./routes/chat.routes'))
+//const hola  = require('./dbmongo');
+port = 5000;
 
-server.use((req, res, next) => {
+const app = express();
+app.use(cors());
+app.use(routes);
 
-    res.status(400).render("404", 
-    {
-        titulo: "404",
-        description: "titulo del sitio "
-    })
-})*/
+app.listen(port, () =>{
+
+    console.log(`Server listening on port http://localhost:${port}`);
+})
+
+    mongoose.connect(MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},)
+    .then(()  => console.log('Connected to database mongodb'))
+    .catch(e  => console.log('error connect to database',e));
+
+
+
+
+

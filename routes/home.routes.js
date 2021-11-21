@@ -1,11 +1,10 @@
-const { Router } = require('express');
-const { check } = require('express-validator');
-const router = Router();
-const cors = require('cors');
-app.use(cors()).use(express.json())
+const express = require('express');
+const router = express.Router();
+
 router.get('/home',(req, res) =>
 {
     res.send('hola');
 })
 
 module.exports = router;
+
