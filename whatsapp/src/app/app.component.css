@@ -1,12 +1,4 @@
-.platformio-ide-terminal .xterm {
-  background-color: ;
-  color: ;
+.wrapper{
 
-  ::selection {
-    background-color: ;
-  }
-
-  .terminal-cursor {
-    background-color: ;
-  }
+  background-color: blue;
 }

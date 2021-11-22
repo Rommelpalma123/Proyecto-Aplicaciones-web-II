@@ -14,8 +14,8 @@ const obtenerMaterias= async (req, res = response )=>{
     ])
   
     res.json({
-      total, 
-      materias
+    total, 
+    materias
     })
     
 }
