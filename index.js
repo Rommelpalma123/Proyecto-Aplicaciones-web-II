@@ -1,46 +1,52 @@
 const path = require('path'); // requerimos la libreira para path
-const mongoose = require('mongoose');
-const {mongo_url} = require('./config');
-const port = 8081;
 const cors = require('cors');
-const { Client, MessageMedia }  = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
+const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
+port = 3001;
 const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
 const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require('express'); // define rutas
+const bodyParser = require('body-parser'); // texto sin formato
 const { send } = require('process')
 const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
-const mongodb = require('./conexiondb'); // requiere una conexion externa
-const server = express(); // creamos funciones para express
+const mongoose = require('mongoose');
+const { MONGO_URL } = require('./database');     
+const routes = require('./routes/user');
+const routes1 = require('./routes/home');
+const routes2 = require('./routes/chat');
 
-//const paginaError = path.join(__dirname,"./error.html"); // creamos una pagina global de error en caso de no encontrar alguna ruta
-//onst index = fs.readFileSync('./chat.html');
+
+const app = express();
 
 
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
 let sessionData; // variables globales
 
-server.use(cors());
-server.use(
+app.use(routes, routes1, routes2);
+//app.use(routes1);
+app.use(cors());
+app.use(
     bodyParser.json()
 )
-server.use(
+app.use(
     bodyParser.urlencoded()
 )
 
+
+
 const sendWithApi = (req, res) => {
 
-    const {message, to } = req.body;
-    console.log(message, to);
+    const { message, to } = req.body;
     const newNumber = `${to}@c.us`;
+    console.log(newNumber)
+    console.log(message, to);
     sendMessage(newNumber, message)
     res.send({ status:'send'})
 }
 
-server.post('/send', sendWithApi)
+app.post('/send',sendWithApi);
 
 // Metodo withSession
 const withSession =  () => 
@@ -110,16 +116,28 @@ const listenMessege = () =>
         switch (body)
         {
             // preguntas frecuentes de un chat mediante los case para tener una respuesta distinta para cada pregunta
-            case 'hola':
-                sendMessage(from, 'Hola, ¿como estas?',)
+            case 'Hola':
+                sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
                 break;
             
-            case 'bien': 
-                sendMessage(from, '¿Que servicio deseas?')
+            case 'Gracias': 
+                sendMessage(from, '¿Que servicio deseas conocer?')
                 break
-            case 'que tal': 
-                sendMessage(from, 'notepad')
+            case 'La maya cirricular': 
+                sendMessage(from, 'maya curricular')
                 sendMedia(from, 'Notas.txt')
+                break
+            case 'Muchas gracias por tu ayuda':
+                sendMessage(from, 'Es un gusto prestar nuestro servicio')
+                break
+            case 'Donde puedo encontrarlos':
+                sendMessage(from, 'avenida manta, uniersidad laica eloy alfaro de manabi')
+                break
+
+            case 'De que lugar nos escribe':
+                sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
+                break;
+                
         }
         saveHistorial(from, body);
         console.log(`${chalk.cyan(body, from)}`);
@@ -144,7 +162,7 @@ const sendMessage = (to, message ) =>
     //client.sendMessage(from, message)
 
 }
-
+// hola Munodo 
 // guarda el historial el numero y mensaje
 const saveHistorial =  (number, message )   =>
 {
@@ -201,7 +219,11 @@ const saveHistorial =  (number, message )   =>
 
 
 //Session.create(sessionData);
-server.listen(port, ()=>
-{
-    console.log(chalk.yellow(`listen port http://localhost:${port}`));
+app.listen(port, () =>{
+
+    console.log(`Server listening on port http://localhost:${port}`);
 })
+
+mongoose.connect(MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},)
+.then(()  => console.log('Connected to database mongodb'))
+.catch(e  => console.log('error connect to database',e));
