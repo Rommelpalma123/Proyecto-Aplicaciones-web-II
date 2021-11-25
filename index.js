@@ -116,16 +116,28 @@ const listenMessege = () =>
         switch (body)
         {
             // preguntas frecuentes de un chat mediante los case para tener una respuesta distinta para cada pregunta
-            case 'hola':
-                sendMessage(from, 'Hola, ¿como estas?',)
+            case 'Hola':
+                sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
                 break;
             
-            case 'bien': 
-                sendMessage(from, '¿Que servicio deseas?')
+            case 'Gracias': 
+                sendMessage(from, '¿Que servicio deseas conocer?')
                 break
-            case 'que tal': 
-                sendMessage(from, 'notepad')
+            case 'La maya cirricular': 
+                sendMessage(from, 'maya curricular')
                 sendMedia(from, 'Notas.txt')
+                break
+            case 'Muchas gracias por tu ayuda':
+                sendMessage(from, 'Es un gusto prestar nuestro servicio')
+                break
+            case 'Donde puedo encontrarlos':
+                sendMessage(from, 'avenida manta, uniersidad laica eloy alfaro de manabi')
+                break
+
+            case 'De que lugar nos escribe':
+                sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
+                break;
+                
         }
         saveHistorial(from, body);
         console.log(`${chalk.cyan(body, from)}`);
@@ -150,7 +162,7 @@ const sendMessage = (to, message ) =>
     //client.sendMessage(from, message)
 
 }
-
+// hola Munodo 
 // guarda el historial el numero y mensaje
 const saveHistorial =  (number, message )   =>
 {
