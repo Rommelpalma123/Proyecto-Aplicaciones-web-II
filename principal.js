@@ -1,6 +1,6 @@
 const fs = require('fs'); 
 const path = require('path'); // requerimos la libreira para path
-const port = 8080;
+//const port = 8080;
 const cors = require('cors');
 //const server1 = require('./index'); // es una conexion externa para habilitar un localhost en el navegador
 const express = require('express');
