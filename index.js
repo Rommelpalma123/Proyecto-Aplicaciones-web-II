@@ -117,7 +117,7 @@ const listenMessege = () =>
         {
             // preguntas frecuentes de un chat mediante los case para tener una respuesta distinta para cada pregunta
             case 'Hola':
-                sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
+                sendMessage(from, 'Hola, Permintenos darte la bienvenida del equipo FACCI, nuestro asistente te ayudará a resolver tus dudas')
                 break;
             
             case 'Gracias': 
@@ -131,14 +131,41 @@ const listenMessege = () =>
                 sendMessage(from, 'Es un gusto prestar nuestro servicio')
                 break
             case 'Donde puedo encontrarlos':
-                sendMessage(from, 'avenida manta, uniersidad laica eloy alfaro de manabi')
+                sendMessage(from, 'avenida manta, Universidad Laica "Eloy Alfaro de Manabi')
                 break
 
             case 'De que lugar nos escribe':
                 sendMessage(from, 'Hola, Permintenos darte la bienvenida a nuestro chatbox personalizado para la ayuda de sus actividades')
                 break;
                 
-        }
+            case 'Horarios para primer semestre':
+                sendMessage(from, 'En la pagina oficial de Facebook se publican todos los horarios')
+                    break;
+
+            case 'Cuando comienzan las clases':
+                sendMessage(from, 'Las fechas establecidas para el nuevo periodo son el 22 de abril del 2022')
+                        break;
+            
+            case 'Cuantos niveles de ingles hay que recibir':
+                sendMessage(from, 'Para las mayas antiguas 3 niveles. Para las mayas rediseñadas son de 8 a 12 niveles segun la carrera.')
+                break;
+
+            case 'Como me puedo retirar de alguna materia':
+                sendMessage(from, 'Debes ingresar al aula virtual, ingresa en la materia que deseas retirarte, en el pie de pagina estaeá el boton de retirarse')
+                break;
+
+            case 'En caso de querer retirarme de una materia, durante que tiempo lo debo hacer':
+                    sendMessage(from, 'El tiempo es de 2 semanas habiles apartir del inicio del semestre.')
+                    break;
+            
+            case 'Cuanto es el valor que debo cancelar en caso de perder una materia':
+                sendMessage(from, 'El valor depende de los creditos que tenga la materia ')
+                break;
+            
+            case 'Con quien puedo comunicarme para saber acerca de la carrera.':
+                sendMessage(from, 'Con las secretarias de la facultad. En caso de querer mas información con el coordinador de carrera, el Ing Ruben Solorzano')
+                break;
+            }
         saveHistorial(from, body);
         console.log(`${chalk.cyan(body, from)}`);
 
@@ -149,14 +176,14 @@ const listenMessege = () =>
 }
 
 // metodo para enviar archivos media
-const sendMedia = (to, file) =>  
+const sendMedia = (to, file) => 
 {
     const mediaFile = MessageMedia.fromFilePath(`./media/${file}`)
     client.sendMessage(to, mediaFile);
 }
 
 // envia el mensaje de y para 
-const sendMessage = (to, message ) => 
+const sendMessage = (to, message ) =>
 {
     client.sendMessage(to, message)
     //client.sendMessage(from, message)
