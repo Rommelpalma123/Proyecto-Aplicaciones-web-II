@@ -7,7 +7,7 @@ import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  url= 'http://localhost:5000/send';
+  url= 'http://localhost:3001/send';
   to: any;
   message: any;
 
