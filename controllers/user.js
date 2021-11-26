@@ -8,7 +8,7 @@ const usuario=  ( req, res) =>
             docs
         })
     })
-    res.send('esto viene desde la rura user')
+    //res.send('esto viene desde la rura user')
 }
 
 const insertar = ( req, res) =>{
@@ -18,5 +18,4 @@ const insertar = ( req, res) =>{
         res.send({ data: docs})
     })
 }
-
 module.exports = { usuario, insertar };
