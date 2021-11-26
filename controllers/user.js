@@ -1,4 +1,7 @@
-exports.getData = ( req, res) =>
+const usuario = {}
+usuario.index =  ( req, res) =>
 {
-    res.send({data: 'esto viene desde la rura user'})
+    res.send('esto viene desde la rura user')
 }
+
+module.exports = usuario;

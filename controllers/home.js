@@ -1,4 +1,7 @@
-exports.getData = ( req, res) =>
+const home = {}
+home.index = ( req, res) =>
 {
-    res.send({data: 'esto viene desde la rura home'})
+    res.send('esto viene desde la rura home')
 }
+
+module.exports = home;

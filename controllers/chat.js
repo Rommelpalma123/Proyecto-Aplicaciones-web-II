@@ -1,4 +1,7 @@
-exports.getData = ( req, res) =>
+const chat = {}
+chat.index = ( req, res) =>
 {
-    res.send({data: 'esto viene desde la rura chat'})
+    res.send('esto viene desde la rura chat')
 }
+
+module.exports = chat;
