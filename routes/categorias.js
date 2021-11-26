@@ -1,23 +1,21 @@
-const { Router } = require('express');
-const { check } = require('express-validator');
+//const { Router } = require('express');
 
 //const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
 
-const { crearCategoria,
+/*const { crearCategoria,
         obtenerCategorias,
         obtenerCategoria,
         actualizarCategoria, 
         borrarCategoria } = require('../controllers/categorias');
-//const { existeCategoriaPorId } = require('../helpers/db-validators');
 
-const router = Router();
+const router = Router();*/
 
 /**
  * {{url}}/api/categorias
  */
 
 //  Obtener todas las categorias - publico
-router.get('/', obtenerCategorias );
+//router.get('/', obtenerCategorias );
 
 // Obtener una categoria por id - publico
 /*router.get('/:id',[
@@ -51,4 +49,4 @@ router.get('/', obtenerCategorias );
 
 
 
-module.exports = router;
+//module.exports = router;
