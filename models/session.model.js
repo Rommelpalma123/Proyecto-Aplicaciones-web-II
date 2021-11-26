@@ -1,15 +1,27 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 // creamos arreglos
-const Session = new Schema(
+const Userschema = new Schema(
 
     {
-        number:  {type: String}
+        name: {
+            
+            type : String
+        
+        },
 
-    },
+        avatar: {
+            type : String,
+            default: 'http://image.com'
+        },
 
-    { timestamp: { createdAt: true, updatedAt: true} }
+        email: {
+            type : String,
+            unique: true,
+            required: true }
+    }, 
+
 )
 
-module.exports = mongoose.model("Sesion", Session)
+module.exports = mongoose.model("User", Userschema)
 

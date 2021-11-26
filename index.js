@@ -15,8 +15,6 @@ const { MONGO_URL } = require('./database');
 const routes = require('./routes/user');
 const routes1 = require('./routes/home');
 const routes2 = require('./routes/chat');
-
-
 const app = express();
 
 
@@ -25,13 +23,18 @@ let client; // variables globales
 let sessionData; // variables globales
 
 app.use(routes, routes1, routes2);
-//app.use(routes1);
+
 app.use(cors());
 app.use(
-    bodyParser.json()
+    bodyParser.json({
+        limit: '20mb'
+    })
 )
 app.use(
-    bodyParser.urlencoded()
+    bodyParser.urlencoded({
+        limit:'20mb',
+        extended: true
+    })
 )
 
 
