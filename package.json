@@ -34,6 +34,6 @@
     "whatsapp-web.js": "^1.15.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.15"
   }
 }
