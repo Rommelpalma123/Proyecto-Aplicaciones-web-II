@@ -20,13 +20,13 @@ const routes2 = require('./routes/user');
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
 let sessionData; // variables globales
 
 app.use(routes, routes1, routes2);
-
+app.use(cors())
 app.use(
     bodyParser.json({
         limit: '20mb'
