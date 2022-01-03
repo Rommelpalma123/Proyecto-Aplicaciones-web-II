@@ -1,15 +1,15 @@
-const path = require('path'); // requerimos la libreira para path
+//const path = require('path'); // requerimos la libreira para path
 const cors = require('cors');
-const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
-const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
+//const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
+//const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
-const port = process.env.PORT || 3001;
-const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
-const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
+const port = process.env.PORT || 5000;
+//const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
+//const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
 const express = require('express'); // define rutas
 const bodyParser = require('body-parser'); // texto sin formato
-const { send } = require('process')
-const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
+//const { send } = require('process')
+//const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
 const mongoose = require('mongoose');
 const { MONGO_URL } = require('./database');     
 const routes = require('./routes/chat');
@@ -20,10 +20,10 @@ const routes2 = require('./routes/user');
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
+/*app.use(express.urlencoded({ extended: true }));
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
-let sessionData; // variables globales
+let sessionData; // variables globales*/
 
 app.use(routes, routes1, routes2);
 app.use(cors())
@@ -41,7 +41,7 @@ app.use(
 
 
 
-const sendWithApi = (req, res) => {
+/*const sendWithApi = (req, res) => {
 
     const { message, to } = req.body;
     const newNumber = `${to}@c.us`;
@@ -51,10 +51,10 @@ const sendWithApi = (req, res) => {
     res.send({ status:'send'})
 }
 
-app.post('/send',sendWithApi);
+app.post('/send',sendWithApi);*/
 
 // Metodo withSession
-const withSession =  () => 
+/*const withSession =  () => 
 {
 
     // esta funcion servira para cargar una seccion existente en caso que esta este guardada
@@ -250,7 +250,7 @@ const saveHistorial =  (number, message )   =>
 ( fs.existsSync(SESSION_FILE_PATH)) ? withSession() : withOutSeccion(); // consicion ternaria
 
 
-//Session.create (sessionData);
+//Session.create (sessionData);*/
 app.listen(port, () =>{
 
     console.log(`Server listening on port http://localhost:${port}`);

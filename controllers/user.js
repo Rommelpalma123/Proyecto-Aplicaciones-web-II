@@ -1,21 +1,42 @@
-const model = require('../models/session.model')
+const { v4: uuidv4 } = require('uuid');
+let users = [];
 
-const usuario=  ( req, res) =>
+const getUsers = ( req, res) =>
 {
-    model.find({}, (req, docs) => {
-
-        res.send({
-            docs
-        })
-    })
-    //res.send('esto viene desde la rura user')
+    res.send(users)
 }
 
-const insertar = ( req, res) =>{
+const createUser = (req, res) => 
+{
+    const user = req.body;
+    users.push({...user, id: uuidv4()});
+    res.send('User added successfully')
+    
 
-    const data = req.body
-    model.create(data, (err,docs) =>{
-        res.send({ data: docs})
-    })
 }
-module.exports = { usuario, insertar };
+
+const getUser = (req, res) => 
+{
+    const singleUser = users.filter((user) => user.id === req.params.id);
+    res.send(singleUser);
+}
+
+const deleteUser = (req, res) => 
+{
+    users = users.filter((user) => user.id !== req.params.id);
+    res.send('User deleted successfully'); 
+}
+
+
+
+const updateUser = (req, res) => 
+{
+    const user = users.filter((user) => user.id === req.params.id);
+
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.contact = req.body.contact;
+
+    res.send("user updated successfully");
+}
+module.exports = { updateUser, getUsers, createUser, getUser, deleteUser };
