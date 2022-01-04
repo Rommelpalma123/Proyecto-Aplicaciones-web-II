@@ -11,7 +11,8 @@ const bodyParser = require('body-parser'); // texto sin formato
 //const { send } = require('process')
 //const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
 const mongoose = require('mongoose');
-const { MONGO_URL } = require('./database');     
+const { MONGO_URL } = require('./database');  
+const Pusher = require('pusher');   
 const routes = require('./routes/chat');
 const routes1 = require('./routes/home');
 const routes2 = require('./routes/user');
@@ -41,6 +42,43 @@ app.use(
 
 app.get("/", (req, res) => res.send("hello from express"));
 app.all("/", (req, res) => res.send("that route doesn't exist"));
+
+const pusher = new Pusher({
+    appId: "1301155",
+    key: "0fc2c25246c719433348",
+    secret: "0b9d79c4f6fbb2eba4a1",
+    cluster: "us2",
+    useTLS: true
+    });
+    
+    const db = mongoose.connection;
+    db.once("open" , () =>{
+    
+        console.log('db coneccted');
+    
+        const msgCollection = db.collection('messageconstents')
+        const changeStream = msgCollection.watch();
+        changeStream.on("change", (change) =>{
+    
+            console.log('a change acurred',change);
+    
+            if(change.operationType === "insert")
+            {
+                const messageDetails = change.fullDocument;
+                pusher.trigger('messages', 'inserted',
+                {
+                    name: messageDetails.name,
+                    message: messageDetails.message,
+                    timestamp: messageDetails.timestamp,
+                    received: messageDetails.received
+                });
+            }
+            else 
+            {
+                console.log('error triggering pusher');
+            }
+        });
+    });
 
 /*const sendWithApi = (req, res) => {
 

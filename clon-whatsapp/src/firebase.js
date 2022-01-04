@@ -1,4 +1,5 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// eslint-disable-next-line no-unused-vars
 const firebaseConfig = {
     apiKey: "AIzaSyAVU06zrAwGNxpckMFsjOFv6XEEQLWrlro",
     authDomain: "whatsapp-582a1.firebaseapp.com",
