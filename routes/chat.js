@@ -6,5 +6,4 @@ router.get('/', message )
 router.get('/messages/sync', messeagesync)
 router.post('/messages/new', messagenew)
 
-
 module.exports = router;

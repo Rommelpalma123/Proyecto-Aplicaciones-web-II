@@ -50,7 +50,7 @@ function Chat({ messages }) {
             </div>
             <div className="chat__body">
                 {messages.map((message) =>(
-                    <p className={`chat_message ${message.received && "chat_reciever"}`}>
+                    <p className={`chat__message ${message.received && "chat__reciever"}`}>
                     <spam className="chat__name"> {message.name} </spam>
                     {message.message}
                     <spam className="chat__timestamp"> {message.timestamp} </spam>
@@ -77,3 +77,4 @@ function Chat({ messages }) {
     );
 }
 export default Chat;
+
