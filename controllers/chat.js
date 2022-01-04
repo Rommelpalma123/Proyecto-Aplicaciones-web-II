@@ -1,9 +1,41 @@
 
-const index = require('../index')
-const chat = ( req, res) =>
+const Messages = require('../models/chat')
+
+const message = (req, res) =>
 {
-    res.send('esto viene desde la rura chat')
+    res.send(200).send("esta correcto el mensaje") 
 }
 
+const messeagesync = (req, res) =>
+{
+    Messages.find( (err, data) => {
 
-module.exports = chat;
+        if (err) {
+
+            res.status(500).send(err);
+        }
+        else{
+
+            res.status(200).send(data);
+        }
+    })
+}
+
+const messagenew = (req, res) =>
+{
+    const dbMessage = req.body;
+
+    Messages.create(dbMessage, (err, data) => {
+
+        if (err) {
+
+            res.status(500).send(err);
+        }
+        else{
+
+            res.status(201).send(data);
+        }
+    })
+}
+
+module.exports = { message, messagenew, messeagesync };

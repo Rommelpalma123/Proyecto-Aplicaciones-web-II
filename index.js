@@ -39,7 +39,8 @@ app.use(
     })
 )
 
-
+app.get("/", (req, res) => res.send("hello from express"));
+app.all("/", (req, res) => res.send("that route doesn't exist"));
 
 /*const sendWithApi = (req, res) => {
 

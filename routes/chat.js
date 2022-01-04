@@ -1,9 +1,10 @@
 const express = require('express');
-const chat = require('../controllers/chat')
+const { message, messagenew, messeagesync } = require('../controllers/chat')
 const router = express.Router();
 
-router.get('/chat', chat)
-//router.post('/send',sendWithApi);
+router.get('/', message )
+router.get('/messages/sync', messeagesync)
+router.post('/messages/new', messagenew)
 
 
 module.exports = router;

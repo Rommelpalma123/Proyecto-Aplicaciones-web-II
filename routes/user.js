@@ -3,14 +3,18 @@ const { getUsers, createUser, getUser, deleteUser, updateUser } = require('../co
 
 const router = express.Router();
 
+// GET all Tasks
+router.get('/', getUsers);
 
+// GET all Tasks
+router.get('/:id', getUser);
 
-router.get('/users', getUsers);
-router.post('/user', createUser)
-router.get('/user/:id', getUser)
-router.delete('/user/:id', deleteUser)
-router.put('/user/:id', updateUser)
-router.put('/user/:id', updateUser)
+// ADD a new task
+router.post('/', createUser);
 
+// UPDATE a new task
+router.put('/:id', updateUser);
 
-module.exports = router;    
+router.delete('/:id', deleteUser);
+
+module.exports = router;

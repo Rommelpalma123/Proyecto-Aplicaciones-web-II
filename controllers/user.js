@@ -1,42 +1,37 @@
-const { v4: uuidv4 } = require('uuid');
-let users = [];
+const User = require('../models/user');
+
 
 const getUsers = ( req, res) =>
 {
-    res.send(users)
+    const users = User.find();
+    res.json(users);
 }
 
 const createUser = (req, res) => 
 {
-    const user = req.body;
-    users.push({...user, id: uuidv4()});
-    res.send('User added successfully')
-    
-
+    const { nombre, description } = req.body;
+    const user = new User({nombre, description});
+    user.save();
+    res.json({status: 'User Saved'});
 }
 
 const getUser = (req, res) => 
 {
-    const singleUser = users.filter((user) => user.id === req.params.id);
-    res.send(singleUser);
+    const user =  User.findById(req.params.id);
+    res.json(user);
 }
 
 const deleteUser = (req, res) => 
 {
-    users = users.filter((user) => user.id !== req.params.id);
-    res.send('User deleted successfully'); 
+    User.findByIdAndRemove(req.params.id);
+    res.json({status: 'user Deleted'});
 }
-
-
 
 const updateUser = (req, res) => 
 {
-    const user = users.filter((user) => user.id === req.params.id);
-
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.contact = req.body.contact;
-
-    res.send("user updated successfully");
+    const { name, description } = req.body;
+    const newUser = {name, description};
+    User.findByIdAndUpdate(req.params.id, newUser);
+    res.json({status: 'User Updated'});
 }
 module.exports = { updateUser, getUsers, createUser, getUser, deleteUser };
