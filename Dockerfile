@@ -1,6 +1,6 @@
 FROM node
 COPY . /var/www
 WORKDIR /var/www
-RUN npm install --only=production
+RUN npm install
 EXPOSE 3001
 ENTRYPOINT [ "npm", "start" ]

@@ -1,37 +1,37 @@
 const User = require('../models/user');
 
 
-const getUsers = ( req, res) =>
+const getUsers = async ( req, res) =>
 {
-    const users = User.find();
+    const users = await User.find();
     res.json(users);
 }
 
-const createUser = (req, res) => 
+const createUser = async (req, res) => 
 {
     const { nombre, description } = req.body;
     const user = new User({nombre, description});
-    user.save();
+    await user.save();
     res.json({status: 'User Saved'});
 }
 
-const getUser = (req, res) => 
+const getUser = async (req, res) => 
 {
-    const user =  User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     res.json(user);
 }
 
-const deleteUser = (req, res) => 
+const deleteUser = async (req, res) => 
 {
-    User.findByIdAndRemove(req.params.id);
+    await User.findByIdAndRemove(req.params.id);
     res.json({status: 'user Deleted'});
 }
 
-const updateUser = (req, res) => 
+const updateUser = async (req, res) => 
 {
     const { name, description } = req.body;
     const newUser = {name, description};
-    User.findByIdAndUpdate(req.params.id, newUser);
+    await User.findByIdAndUpdate(req.params.id, newUser);
     res.json({status: 'User Updated'});
 }
 module.exports = { updateUser, getUsers, createUser, getUser, deleteUser };

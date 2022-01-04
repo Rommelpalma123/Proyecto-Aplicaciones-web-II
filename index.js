@@ -25,7 +25,8 @@ const app = express();
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
 let sessionData; // variables globales*/
-
+app.use('/api/users', require('./routes/user'))
+app.use(express.json());
 app.use(routes, routes1, routes2);
 app.use(cors())
 app.use(
@@ -43,7 +44,7 @@ app.use(
 app.get("/", (req, res) => res.send("hello from express"));
 app.all("/", (req, res) => res.send("that route doesn't exist"));
 
-const pusher = new Pusher({
+const pusher = new Pusher({ 
     appId: "1301155",
     key: "0fc2c25246c719433348",
     secret: "0b9d79c4f6fbb2eba4a1",
@@ -51,6 +52,7 @@ const pusher = new Pusher({
     useTLS: true
     });
     
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.once("open" , () =>{
     
@@ -79,6 +81,12 @@ const pusher = new Pusher({
             }
         });
     });
+
+    app.listen(port, () =>{
+
+        console.log(`Server listening on port http://localhost:${port}`);
+    })
+    
 
 /*const sendWithApi = (req, res) => {
 
@@ -290,11 +298,4 @@ const saveHistorial =  (number, message )   =>
 
 
 //Session.create (sessionData);*/
-app.listen(port, () =>{
 
-    console.log(`Server listening on port http://localhost:${port}`);
-})
-
-mongoose.connect(MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},)
-.then(()  => console.log('Connected to database mongodb'))
-.catch(e  => console.log('error connect to database',e));
