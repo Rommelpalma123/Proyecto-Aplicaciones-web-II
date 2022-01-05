@@ -1,4 +1,4 @@
-//const path = require('path'); // requerimos la libreira para path
+const path = require('path'); // requerimos la libreira para path
 const cors = require('cors');
 //const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 //const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
@@ -25,7 +25,8 @@ const app = express();
 const SESSION_FILE_PATH = './session.json';
 let client; // variables globales
 let sessionData; // variables globales*/
-app.use('/api/users', require('./routes/user'))
+app.use('/api/users', require('./routes/user'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(routes, routes1, routes2);
 app.use(cors())
@@ -41,8 +42,6 @@ app.use(
     })
 )
 
-app.get("/", (req, res) => res.send("hello from express"));
-app.all("/", (req, res) => res.send("that route doesn't exist"));
 
 const pusher = new Pusher({ 
     appId: "1301155",
