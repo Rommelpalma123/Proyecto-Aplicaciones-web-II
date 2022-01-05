@@ -3,7 +3,7 @@ const cors = require('cors');
 //const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
 //const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
 const fs = require('fs'); 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 9000;
 //const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
 //const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
 const express = require('express'); // define rutas
@@ -52,7 +52,9 @@ const pusher = new Pusher({
     useTLS: true
     });
     
-mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connect'))
+    .catch(e => console.log(e))
     const db = mongoose.connection;
     db.once("open" , () =>{
     
@@ -81,6 +83,7 @@ mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
             }
         });
     });
+    
 
     app.listen(port, () =>{
 
