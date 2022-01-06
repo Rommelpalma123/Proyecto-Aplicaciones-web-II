@@ -1,0 +1,15 @@
+version: "3"
+
+services: 
+  api:
+    build: .
+    depends_on:
+      - mongo
+    environment:
+      - PORT=9000
+      - url=mongodb://mongo:27017/chat
+    ports:
+      - "9000:9000"
+
+  mongo:
+    image: mongo
