@@ -1,0 +1,46 @@
+{
+  "name": "proyecto-aplicaciones-web-ii",
+  "version": "1.0.0",
+  "description": "Proyecto Aplicaciones web II",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II/issues"
+  },
+  "homepage": "https://github.com/Rommelpalma123/Proyecto-Aplicaciones-web-II#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "exceljs": "^4.3.0",
+    "express": "^4.17.2",
+    "express-validator": "^6.13.0",
+    "mime-db": "^1.51.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.12",
+    "ora": "^6.0.1",
+    "pusher": "^5.0.0",
+    "pusher-js": "^7.0.3",
+    "qrcode-terminal": "^0.12.0",
+    "uuid": "^8.3.2",
+    "whatsapp-web.js": "^1.15.1"
+  },
+  "devDependencies": {
+    "@material-ui/icons": "^4.11.2",
+    "nodemon": "^2.0.15"
+  }
+}
