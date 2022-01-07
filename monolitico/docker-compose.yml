@@ -7,7 +7,7 @@ services:
       - mongo
     environment:
       - PORT=9000
-      - url=mongodb://mongo:27017/chat
+      - url=mongodb://mongo:27017/test
     ports:
       - "9000:9000"
 
