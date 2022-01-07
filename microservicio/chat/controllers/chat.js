@@ -3,7 +3,7 @@ const Messages = require('../models/chat')
 
 const message = (req, res) =>
 {
-    res.send("microservicios de chat v2") 
+    res.send("microservicios de chat v2");
 }
 
 const messeagesync = (req, res) =>
