@@ -5,20 +5,12 @@ const express = require('express'); // define rutas
 const bodyParser = require('body-parser'); // texto sin formato.
 const mongoose = require('mongoose');
 const { MONGO_URL } = require('./database');  
-const Pusher = require('pusher');   
 const chat = require('./routes/chat');
 const home = require('./routes/home');
 const user = require('./routes/user');
-
-
-
 const app = express();
 
-/*app.use(express.urlencoded({ extended: true }));
-const SESSION_FILE_PATH = './session.json';
-let client; // variables globales
-let sessionData; // variables globales*/
-app.use('/api/users', require('./routes/user'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use('/api/v1', chat, home, user );
@@ -35,21 +27,58 @@ app.use(
     })
 )
 
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connect'))
+    .catch(e => console.log(e))
 
-const pusher = new Pusher({ 
+app.listen(port, () =>{
+
+    console.log(`Server listening on port http://localhost:${port}`);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*app.use(express.urlencoded({ extended: true }));
+const SESSION_FILE_PATH = './session.json';
+let client; // variables globales
+let sessionData; // variables globales*/
+//app.use('/api/users', require('./routes/user'));
+
+/*const pusher = new Pusher({ 
     appId: "1301155",
     key: "0fc2c25246c719433348",
     secret: "0b9d79c4f6fbb2eba4a1",
     cluster: "us2",
     useTLS: true
-    });
-    
-mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connect'))
-    .catch(e => console.log(e))
-    const db = mongoose.connection;
+    });*/
+
+    /*const db = mongoose.connection;
     db.once("open" , () =>{
-    
+        //console.log(db)
+
         console.log('db coneccted');
     
         const msgCollection = db.collection('messageconstents')
@@ -74,14 +103,10 @@ mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
                 console.log('error triggering pusher');
             }
         });
-    });
+    });*/
     
 
-    app.listen(port, () =>{
-
-        console.log(`Server listening on port http://localhost:${port}`);
-    })
-    
+  
 
 /*const sendWithApi = (req, res) => {
 

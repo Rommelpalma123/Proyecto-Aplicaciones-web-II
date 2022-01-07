@@ -14,8 +14,8 @@ app.use(cors())
 
     
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connect'))
-    .catch(e => console.log(e))
+    .then(() => console.log('Connect base de dato user'))
+    .catch(e => console.log(e));
     
     
 
