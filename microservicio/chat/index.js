@@ -1,29 +1,14 @@
-const path = require('path'); // requerimos la libreira para path
 const cors = require('cors');
-//const { Client, MessageMedia } = require('whatsapp-web.js'); // exportamos la libreria para trabajar con un box de whatsapp web 
-//const qrcode = require('qrcode-terminal');  // libreria para convertit codigo en linea a codigo qr para poderlo leer con el scaner de whatsapp
-const fs = require('fs'); 
 const port = process.env.PORT || 9000;
-//const chalk = require('chalk'); // libreria que pinta los mensajes en la consola
-//const exceljs = require('exceljs'); // sirve como base de datos para guardar los chats
 const express = require('express'); // define rutas
 const bodyParser = require('body-parser'); // texto sin formato
-//const { send } = require('process')
-//const moment = require('moment'); // sirve para definir dias, meses, horas, etc.
 const mongoose = require('mongoose');
 const { MONGO_URL } = require('./database');  
 const Pusher = require('pusher');   
 const chat = require('./routes/chat');
 
-
-
-
 const app = express();
 
-/*app.use(express.urlencoded({ extended: true }));
-const SESSION_FILE_PATH = './session.json';
-let client; // variables globales
-let sessionData; // variables globales*/
 app.use(express.json());
 app.use('/api/v2',chat);
 app.use(cors())

@@ -1,5 +1,10 @@
 const User = require('../models/user');
 
+const getmessage = async ( req, res) =>
+{
+    
+    res.send("esta ruta es monolitica v1");
+}
 
 const getUsers = async ( req, res) =>
 {
@@ -34,4 +39,4 @@ const updateUser = async (req, res) =>
     await User.findByIdAndUpdate(req.params.id, newUser);
     res.json({status: 'User Updated'});
 }
-module.exports = { updateUser, getUsers, createUser, getUser, deleteUser };
+module.exports = { updateUser, getUsers, createUser, getUser, deleteUser, getmessage };

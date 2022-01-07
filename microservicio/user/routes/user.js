@@ -6,7 +6,7 @@ const router = express.Router();
 // GET all Tasks
 router.get('/users', getUsers);
 
-router.get('/', getmessage);
+router.get('/messageuser', getmessage);
 
 // GET all Tasks
 router.get('/user/:id', getUser);

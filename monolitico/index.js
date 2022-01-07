@@ -13,9 +13,9 @@ const bodyParser = require('body-parser'); // texto sin formato
 const mongoose = require('mongoose');
 const { MONGO_URL } = require('./database');  
 const Pusher = require('pusher');   
-const routes = require('./routes/chat');
-const routes1 = require('./routes/home');
-const routes2 = require('./routes/user');
+const chat = require('./routes/chat');
+const home = require('./routes/home');
+const user = require('./routes/user');
 
 
 
@@ -28,7 +28,7 @@ let sessionData; // variables globales*/
 app.use('/api/users', require('./routes/user'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use(routes, routes1, routes2);
+app.use('/api/v1', chat, home, user );
 app.use(cors())
 app.use(
     bodyParser.json({
