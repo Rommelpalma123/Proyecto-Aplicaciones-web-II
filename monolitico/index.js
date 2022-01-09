@@ -11,13 +11,13 @@ const user = require('./routes/user');
 const app = express();
 
 app.use('/api/user', user);
+app.use('/', home);
+app.use('/api/chat', chat);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use('/api/chat', chat);
 app.set("view engine", "ejs")
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
-app.use('/', home);
 app.use(cors())
 app.use(
     bodyParser.json({
