@@ -10,7 +10,7 @@ const home = require('./routes/home');
 const user = require('./routes/user');
 const app = express();
 
-//app.use('/api/user', user);
+app.use('/api/user', user);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use('/api/chat', chat);
