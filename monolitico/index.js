@@ -10,10 +10,14 @@ const home = require('./routes/home');
 const user = require('./routes/user');
 const app = express();
 
-
+app.use('/api/user', user);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use('/api/v1', chat, home, user );
+app.use('/api/chat', chat);
+app.set("view engine", "ejs")
+app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
+app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
+app.use('/', home);
 app.use(cors())
 app.use(
     bodyParser.json({
@@ -28,8 +32,8 @@ app.use(
 )
 
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connect'))
-    .catch(e => console.log(e))
+    .then(() => console.log('Connect to mongo'))
+    .catch(e => console.log('error al conectarse a la base de datos'))
 
 app.listen(port, () =>{
 

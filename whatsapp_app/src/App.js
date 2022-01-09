@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() =>{
 
-    axios.get('/messages/sync')
+    axios.get('api/chat/messages/sync')
     .then((response) => {
     setMessages(response.data);
     })

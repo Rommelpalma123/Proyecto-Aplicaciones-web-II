@@ -1,8 +1,21 @@
 const express = require('express');
-const home = require('../controllers/home')
-const router = express.Router();
+const route = express.Router()
 
-router.get('/home', home)
+const { update_user, homeRoutes, add_user } = require('../services/render');
+const controller = require('../controllers/home');
 
-module.exports = router;
+route.get('/home', homeRoutes);
 
+route.get('/add-user', add_user)
+
+route.get('/update-user', update_user)
+
+
+// API
+route.post('/api/users', controller.create);
+route.get('/api/users', controller.find);
+route.put('/api/users/:id', controller.update);
+route.delete('/api/users/:id', controller.delete);
+
+
+module.exports = route
