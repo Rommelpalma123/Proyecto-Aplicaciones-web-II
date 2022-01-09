@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 const getmessage = async ( req, res) =>
 {
-    
+
     res.send("esta ruta es monolitica v1");
 }
 
