@@ -105,6 +105,10 @@ let sessionData; // variables globales*/
         });
     });*/
     
+    // LLama la rutas para el Crud
+    app.use('/api/user' ,require('./routes/user'));
+    // Static File
+    app.use(express.static(path.join(__dirname, 'public')));
 
   
 
