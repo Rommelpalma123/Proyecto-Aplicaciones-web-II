@@ -13,7 +13,7 @@ function Chat({ messages }) {
     const sendMessage = async (e)=>
     {
         e.preventDefault();
-        await axios.post("api/chat/messages/new", {
+        await axios.post("/messages/new", {
 
         message: input,
         name: "demo app",

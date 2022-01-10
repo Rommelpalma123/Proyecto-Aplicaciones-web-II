@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const homeschema = new mongoose.Schema({
+const { Schema } = mongoose;
+const homeschema = new Schema({
     name : {
         type : String,
         required: [true, "nombre es requerido abligatoriamente"]
@@ -14,6 +14,4 @@ const homeschema = new mongoose.Schema({
     status : String
 })
 
-const Userdb = mongoose.model('homeuser', homeschema);
-
-module.exports = Userdb;
+module.exports = mongoose.model('homeuser', homeschema);

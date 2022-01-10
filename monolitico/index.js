@@ -10,10 +10,10 @@ const home = require('./routes/home');
 const user = require('./routes/user');
 const app = express();
 
-app.use('/api/user', user);
-app.use('/', home);
-app.use('/api/chat', chat);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use( '/api/users',user);
+app.use('/',home);
+app.use( chat);
+app.use(express.static(path.join(__dirname , 'public')));
 app.use(express.json());
 app.set("view engine", "ejs")
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
@@ -109,12 +109,6 @@ let sessionData; // variables globales*/
         });
     });*/
     
-    // LLama la rutas para el Crud
-    app.use('/api/user' ,require('./routes/user'));
-    // Static File
-    app.use(express.static(path.join(__dirname, 'public')));
-
-  
 
 /*const sendWithApi = (req, res) => {
 

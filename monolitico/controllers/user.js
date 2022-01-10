@@ -15,7 +15,7 @@ const getUsers = async ( req, res) =>
 const createUser = async (req, res) => 
 {
     const { nombre, description } = req.body;
-    const user = new User({ nombre, description });
+    const user = new User({nombre, description});
     await user.save();
     res.json({status: 'User Saved'});
 }
@@ -32,7 +32,7 @@ const deleteUser = async (req, res) =>
     res.json({status: 'user Deleted'});
 }
 
-const updateUser =  async (req, res) => 
+const updateUser = async (req, res) => 
 {
     const { name, description } = req.body;
     const newUser = {name, description};
