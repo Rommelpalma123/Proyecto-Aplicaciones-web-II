@@ -10,11 +10,9 @@ const home = require('./routes/home');
 const user = require('./routes/user');
 const app = express();
 
-app.use( '/api/users',user);
-app.use('/',home);
-app.use( chat);
-app.use(express.static(path.join(__dirname , 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use('/api/users', chat, home, user );
 app.set("view engine", "ejs")
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
