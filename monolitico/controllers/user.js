@@ -14,8 +14,8 @@ const getUsers = async ( req, res) =>
 
 const createUser = async (req, res) => 
 {
-    const { nombre, description } = req.body;
-    const user = new User({nombre, description});
+    const { Nombre, Conversacion } = req.body;
+    const user = new User({Nombre, Conversacion});
     await user.save();
     res.json({status: 'User Saved'});
 }
@@ -34,8 +34,8 @@ const deleteUser = async (req, res) =>
 
 const updateUser = async (req, res) => 
 {
-    const { name, description } = req.body;
-    const newUser = {name, description};
+    const { Nombre, Conversacion } = req.body;
+    const newUser = {Nombre, Conversacion};
     await User.findByIdAndUpdate(req.params.id, newUser);
     res.json({status: 'User Updated'});
 }

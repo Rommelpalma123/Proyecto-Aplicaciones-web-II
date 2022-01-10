@@ -3,18 +3,21 @@ const { getUsers, createUser, getUser, deleteUser, updateUser } = require('../co
 
 const router = express.Router();
 
-// GET all Tasks
-router.get('/users', getUsers);
+//Crud los usuarios que tengo 
+// Get de los usuarios
+router.get('/msg', getmessage);
 
-// GET all Tasks
-router.get('/user/:id', getUser);
+router.get('/', getUsers);
+// Get de un solo usuario con su ID
+router.get('/:id', getUser );
 
-// ADD a new task
-router.post('/user', createUser);
+// post para guardar usuario
+router.post('/', createUser);
 
-// UPDATE a new task
-router.put('/user/:id', updateUser);
+// put para actulizar Usuario
+router.put('/:id',updateUser );
 
-router.delete('/user/:id', deleteUser);
+// Delete para Eliminar usuario
+router.delete('/:id', deleteUser)
 
 module.exports = router;
