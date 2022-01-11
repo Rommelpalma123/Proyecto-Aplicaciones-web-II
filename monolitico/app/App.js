@@ -7,7 +7,7 @@ class App extends Component {
         super();
         this.state = {
             Nombre: '',
-            Conversacion: '',
+            Descripcion: '',
             chats: ''
         };
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +27,7 @@ class App extends Component {
             .then(data => {
                 console.log(data)
                 M.toast({html: 'Usuario Guardado'});
-                this.setState({Nombre: '', Conversacion: ''});
+                this.setState({Nombre: '', Descripcion: ''});
             })
             .catch(err => console.error(err));
 
@@ -81,8 +81,8 @@ class App extends Component {
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <textarea name="Conversacion" onChange={this.handleChange} placeholder="Conversacion" 
-                                                className="materialize-textarea" value={this.state.Conversacion}></textarea>                                                
+                                                <textarea name="Descripcion" onChange={this.handleChange} placeholder="Descripcion" 
+                                                className="materialize-textarea" value={this.state.Descripcion}></textarea>                                                
                                             </div>
                                         </div>
                                         <button type="submit" className="btn light-green darken-4">
@@ -101,7 +101,7 @@ class App extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                   
                                 </tbody>
                             </table>
                         </div>
