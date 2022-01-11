@@ -17,7 +17,7 @@ $("#update_user").submit(function(event){
     console.log(data)
 
     var request = {
-        "url":`http://localhost:9000/api/users/${data.id}`,
+        "url":`http://localhost:9000/api/user/${data.id}`,
         "method":"PUT",
         "data":data
     }
@@ -26,14 +26,13 @@ $("#update_user").submit(function(event){
         alert('data updated')
     })
 })
-
-if(window.location.pathname == "/home"){
+if(window.location.pathname == "/api/users/home"){
     $ondelete = $(".table tbody td a.delete");
     $ondelete.click(function(){
         var id = $(this).attr("data-id")
 
         var request = {
-            "url" : `http://localhost:9000/api/users/${id}`,
+            "url" : `http://localhost:9000/api/users/api/user/${id}`,
             "method" : "DELETE"
         }
 

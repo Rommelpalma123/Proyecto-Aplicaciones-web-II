@@ -3,25 +3,15 @@ const Userdb = require('../models/home');
 // create and save new user
 const create = (req,res)=>{
     // validate request
-    if(!req.body){
-        res.status(400).send({ message : "Content can not be emtpy!"});
-        return;
-    }
-
     // new user
-    const user = new Userdb({
-        name : req.body.name,
-        email : req.body.email,
-        gender: req.body.gender,
-        status : req.body.status
-    })
-
+    const { name, email, gender, status } = req.body;
+    const user = new Userdb({name, email, gender, status});
     // save user in the database
     user
         .save(user)
         .then(data => {
             //res.send(data)
-            res.redirect('/add-user');
+            res.redirect('/api/users/add-user');
         })
         .catch(err =>{
             res.status(500).send({

@@ -20,23 +20,16 @@ const messeagesync = (req, res) =>
             res.status(200).send(data);
         }
     })
+
 }
 
 const messagenew = (req, res) =>
 {
-    const dbMessage = req.body;
-
-    Messages.create(dbMessage, (err, data) => {
-
-        if (err) {
-
-            res.status(500).send(err);
-        }
-        else{
-
-            res.status(201).send(data);
-        }
-    })
+    const { message, name, timestamp, received } = req.body;
+    const user = new Messages({message, name, timestamp, received});
+    user.save();
+    res.json({status: 'chat enviado '});
 }
 
 module.exports = { message, messagenew, messeagesync };
+

@@ -12,10 +12,10 @@ route.get('/update-user', update_user)
 
 
 // API
-route.post('/api/users', create);
-route.get('/api/users', find);
-route.put('/api/users/:id', update);
-route.delete('/api/users/:id', deleteuser);
+route.post('/api/user', create);
+route.get('/api/user', find);
+route.put('/api/user/:id', update);
+route.delete('/api/user/:id', deleteuser);
 
 
 module.exports = route
